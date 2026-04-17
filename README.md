@@ -1,3 +1,23 @@
+## HELLO EVERYONE!
+Hi, I am TOM Maekawa, Team Captain of 22733, and former Design lead of 365, and this is my Coaxial Swerve Code, created from scratch.  
+
+## Using this repository
+
+This Repository is not yet complete, and not yet tested.  
+
+as of 17/4/2026, hardware layouts, wrapper classes, inputs, and general strucuture has been mapped out, but the overall kinematics still needs work.  
+
+
+
+
+
+
+
+
+
+
+
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the DECODE (2025-2026) competition season.
