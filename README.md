@@ -5,6 +5,8 @@ Hi, I am TOM Maekawa, Team Captain of 22733, and former Design lead of 365, and 
 
 This Repository is not yet complete, and not yet tested.  
 
+20/3/2026, Hardware layouts, wrapper classes added, but not complete.  PhotonCore :)
+
 as of 17/4/2026, hardware layouts, wrapper classes, inputs, and general strucuture has been mapped out, but the overall kinematics still needs work.  
 
 
