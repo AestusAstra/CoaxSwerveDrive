@@ -29,22 +29,29 @@ public class SwerveDrive {
 
 
         // Creating new Module instances so we can command them.  Woodedoo :)
-        FRmod = new SwerveModule(FRmotor, FRServo);
-        FLmod = new SwerveModule(FLmotor, FLServo);
-        BRmod = new SwerveModule(BRmotor, BRServo);
-        BLmod = new SwerveModule(BLmotor, BLServo);
+        FRmod = new SwerveModule(FRmotor, FRServo, 1, 0,0);
+        FLmod = new SwerveModule(FLmotor, FLServo, 1, 180,0);
+        BRmod = new SwerveModule(BRmotor, BRServo, -1, 180,0);
+        BLmod = new SwerveModule(BLmotor, BLServo,1, 180,0);
 
     }
 
-    //Motor Behavior
+    //Heading Correction
+
+
+
+
+
+
+
+    //Module Behavior
     public void drive (double forward, double strafe, double rot) {
-        double WheelSpeed = Math.sqrt((forward) * (forward)+(strafe)* (strafe));
-        double ModHeadingRef = Math.atan2(forward, strafe);
-
-
-
-
-
+        double WheelSpeed = Math.sqrt(Math.pow(forward, 2) + Math.pow(strafe, 2));
+        double ModHeadingRef = Math.atan2(forward, strafe)*180/Math.PI;
+        FRmod.drive(WheelSpeed, ModHeadingRef);
+        FLmod.drive(WheelSpeed, ModHeadingRef);
+        BRmod.drive(WheelSpeed, ModHeadingRef);
+        BLmod.drive(WheelSpeed, ModHeadingRef);
     }
 
 
