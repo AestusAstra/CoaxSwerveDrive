@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.KIRIN.Subsystems;
+import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -12,6 +13,8 @@ public class SwerveDrive {
     private final myDcMotorEx FRmotor, FLmotor, BRmotor, BLmotor;
     //Servos :)
     private final CrServoCaching FRServo, FLServo, BRServo, BLServo;
+    //encoders
+    private final AnalogInput FRE, FLE, BRE, BLE;
 
     public SwerveModule FRmod, FLmod, BRmod, BLmod;
     public SwerveDrive(HardwareMap hardwareMap) {
@@ -27,12 +30,17 @@ public class SwerveDrive {
         BRServo = new CrServoCaching(hardwareMap.get(CRServo.class, "FRServo"));
         BLServo = new CrServoCaching(hardwareMap.get(CRServo.class, "FRServo"));
 
+        FRE = hardwareMap.get(AnalogInput.class, "FRE");
+        FLE = hardwareMap.get(AnalogInput.class, "FLE");
+        BRE = hardwareMap.get(AnalogInput.class, "BRE");
+        BLE = hardwareMap.get(AnalogInput.class, "BLE");
+
 
         // Creating new Module instances so we can command them.  Woodedoo :)
-        FRmod = new SwerveModule(FRmotor, FRServo, 1, 0,0);
-        FLmod = new SwerveModule(FLmotor, FLServo, 1, 180,0);
-        BRmod = new SwerveModule(BRmotor, BRServo, -1, 180,0);
-        BLmod = new SwerveModule(BLmotor, BLServo,1, 180,0);
+        FRmod = new SwerveModule(FRmotor, FRServo, FRE, 1, 0,0);
+        FLmod = new SwerveModule(FLmotor, FLServo, FLE, 1, 180,0);
+        BRmod = new SwerveModule(BRmotor, BRServo, BRE, -1, 180,0);
+        BLmod = new SwerveModule(BLmotor, BLServo, BLE, 1, 180,0);
 
     }
 
