@@ -20,13 +20,15 @@ public class SwerveModule {
     private final CrServoCaching servo;
     private final AnalogInput Encoder;
 
+    static double Offset;
+
     private final PIDcontroller ModHeadingPID = new PIDcontroller(0,0,0,0,0);
 
     public SwerveModule(myDcMotorEx m, CrServoCaching S, AnalogInput e, double fb, double lr, double offset) {
         motor = m;
         servo = S;
         Encoder = e;
-        double Offset = offset;
+        Offset = offset;
         m.setDirection(DcMotorSimple.Direction.FORWARD);
         m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         m.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -43,7 +45,7 @@ public class SwerveModule {
         //update PIDcontroller
         ModHeadingPID.setPIDgains(Kp, Ki, Kd, Kf, Kl);
 
-        double ModHeading = Encoder.getVoltage()/3.3 * 360 - offset;
+        double ModHeading = Encoder.getVoltage()/3.3 * 360 - SwerveModule.Offset;
         servo.setPower(ModHeadingPID.pidOut(ModHeadingRef - ModHeading));
         motor.setPower(WheelSpeed);
 
@@ -54,4 +56,3 @@ public class SwerveModule {
     }
 
 }
-
