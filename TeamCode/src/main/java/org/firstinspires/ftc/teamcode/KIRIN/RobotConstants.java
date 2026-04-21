@@ -14,6 +14,11 @@ public class RobotConstants {
     public static double SpeedScale = 1.0;
     public static double RotScale = 1.0;
 
+    public static double FR_mod_offset = 0;
+
+    public static double BR_mod_offset = 0;
+    public static double FL_mod_offset = 0;
+    public static double BL_mod_offset = 0;
 
 
 }
