@@ -39,7 +39,7 @@ public class SwerveModule {
         //update PIDcontroller
         ModHeadingPID.setPIDgains(Kp, Ki, Kd, Kf, Kl);
         double ModHeading = Encoder.getVoltage()/3.3 * 360 - SwerveModule.Offset;
-        servo.setPower(ModHeadingPID.pidOut(ModHeadingRef - ModHeading));
+        servo.setPower(Math.max(ModHeadingPID.pidOut(ModHeadingRef - ModHeading), 0.00001));
         motor.setPower(ModSpeed);
 
 

@@ -17,7 +17,6 @@ public class SwerveDrive {
     double FL_mod_offset = RobotConstants.FL_mod_offset;
     double BL_mod_offset = RobotConstants.BL_mod_offset;
 
-
     public SwerveDrive(HardwareMap hardwareMap) {
 
         //I tried to pull all the hardware from one file, but I guess this system will have to do
@@ -40,7 +39,7 @@ public class SwerveDrive {
         AnalogInput BLE = hardwareMap.get(AnalogInput.class, "BLE");
 
 
-        // Creating new Module instances so we can command them.  Woodedoo :)
+        // Creating new Module instances so we can command them.  Woopdedoo :)
         FR_mod = new SwerveModule(FR_motor, FRServo, FRE, FR_mod_offset);
         FL_mod = new SwerveModule(FL_motor, FLServo, FLE, BR_mod_offset);
         BR_mod = new SwerveModule(BR_motor, BRServo, BRE, FL_mod_offset);

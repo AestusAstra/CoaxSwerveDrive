@@ -9,8 +9,7 @@ public class Robot {
 
 
     // Setup in your Robot class if you have one, or in init at start of opMode
-// Don't do manual or auto bulk caching elsewhere - do it here.
-
+    // Don't do manual or auto bulk caching elsewhere - do it here.
     public Robot (HardwareMap hardwareMap) {
         PhotonCore.CONTROL_HUB.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL);
         PhotonCore.EXPANSION_HUB.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL);
@@ -18,8 +17,6 @@ public class Robot {
         PhotonCore.enable();
 
         Swerve = new SwerveDrive(hardwareMap);
-
-
     }
 
     public void drive(double strafe, double forward, double rot) {

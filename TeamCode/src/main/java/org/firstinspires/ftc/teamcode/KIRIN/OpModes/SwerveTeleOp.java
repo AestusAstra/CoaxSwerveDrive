@@ -23,23 +23,13 @@ public class SwerveTeleOp extends LinearOpMode {
             double strafe = gamepad1.left_stick_x * DriveScale;
             double rot = gamepad1.right_stick_x * RotScale;
 
+            // THAT'S WHAT I'M TALKING ABOUT!
             robot.drive(forward, strafe, rot);
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+            //droop time checker zoop zoop zop
             long currentTime = System.currentTimeMillis();
             long loopTime = currentTime - lastLoopTime;
             lastLoopTime = currentTime;
