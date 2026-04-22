@@ -56,28 +56,33 @@ public class SwerveDrive {
 
 
     //Module Behavior
-    public void drive (double forward, double strafe, double rot) {
+    public void drive (double forward, double strafe, double rot, double heading) {
+
+        double headingrad = Math.toRadians(heading);
+        double strafe1 = Math.cos(headingrad) * strafe - Math.sin(headingrad) * forward;
+        double forward1 = Math.sin(headingrad) * forward + Math.cos(headingrad) * strafe;
+
         //Kinematics (Wheel Specific Vectors)
         // Vx = strafe + rot * Ry
         // Vy = forward - rot * Rx
         // FR , Rx= 1, Ry = 1
-        double FR_strafe1 = strafe + (rot * 1);
-        double FR_forward1 = forward - (rot * 1);
+        double FR_strafe1 = strafe1 + (rot * 1);
+        double FR_forward1 = forward1 - (rot * 1);
         double FRModSpeed = Math.sqrt(Math.pow(FR_strafe1, 2) + Math.pow(FR_forward1, 2));
 
         //FL, Rx = -1, Ry = 1
-        double FL_strafe1 = strafe + (rot * 1);
-        double FL_forward1 = forward - (rot * -1);
+        double FL_strafe1 = strafe1 + (rot * 1);
+        double FL_forward1 = forward1 - (rot * -1);
         double FLModSpeed = Math.sqrt(Math.pow(FL_strafe1, 2) + Math.pow(FL_forward1, 2));
 
         //BR, Rx = 1, Ry = -1
-        double BR_strafe1 = strafe + (rot * -1);
-        double BR_forward1 = forward - (rot * 1);
+        double BR_strafe1 = strafe1 + (rot * -1);
+        double BR_forward1 = forward1 - (rot * 1);
         double BRModSpeed = Math.sqrt(Math.pow(BR_strafe1, 2) + Math.pow(BR_forward1, 2));
 
         //BL, Rx = -1, Ry = -1
-        double BL_strafe1 = strafe + (rot * -1);
-        double BL_forward1 = forward - (rot * -1);
+        double BL_strafe1 = strafe1 + (rot * -1);
+        double BL_forward1 = forward1 - (rot * -1);
         double BLModSpeed = Math.sqrt(Math.pow(BL_strafe1, 2) + Math.pow(BL_forward1, 2));
 
         //Find the actual angle set

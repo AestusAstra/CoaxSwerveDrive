@@ -9,21 +9,19 @@ public class CachingServo implements Servo {
         protected double cachingTolerance = 0.001;
         private double cachedPosition = Double.NaN;
 
-        /*
-         * @param servo the servo to encapsulate in the caching control
-         * @param cachingTolerance the position delta threshold at which a position write will occur.
-         */
+        /**@param servo the servo to encapsulate in the caching control*/
         public CachingServo(Servo servo) {
             this.servo = servo;
             new CachingServo(servo, 0.0005);
         }
 
-        public CachingServo(Servo servo, double cachingTolerance) {
+        /** @param cachingTolerance the position delta threshold at which a position write will occur.*/
+    public CachingServo(Servo servo, double cachingTolerance) {
             this.servo = servo;
             this.cachingTolerance = cachingTolerance;
         }
 
-        /*
+        /**
          * Checks if the change in [position] since last write exceeds [cachingTolerance], if so, does a hardware write (actually sets the position)
          *
          * @param position the position to which the servo should move, a value in the range [0.0, 1.0]

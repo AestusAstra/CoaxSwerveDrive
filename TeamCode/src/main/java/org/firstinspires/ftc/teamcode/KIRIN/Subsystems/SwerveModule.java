@@ -41,11 +41,6 @@ public class SwerveModule {
         double ModHeading = Encoder.getVoltage()/3.3 * 360 - SwerveModule.Offset;
         servo.setPower(Math.max(ModHeadingPID.pidOut(ModHeadingRef - ModHeading), 0.00001));
         motor.setPower(ModSpeed);
-
-
-
-
-
     }
 
 }
