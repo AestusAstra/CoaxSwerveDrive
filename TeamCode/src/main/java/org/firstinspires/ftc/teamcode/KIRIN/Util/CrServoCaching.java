@@ -8,16 +8,13 @@ public class CrServoCaching implements CRServo {
     protected double cachingTolerance;
     private double cachedPower = Double.NaN;
 
-    /*
-     * @param crServo the continuous rotation servo to encapsulate in the caching control
-     * @param cachingTolerance the power delta threshold at which a power write will occur.
-     */
+    /** @param crServo the continuous rotation servo to encapsulate in the caching control*/
     public CrServoCaching(CRServo crServo) {
         this.crServo = crServo;
         new CrServoCaching(crServo, 0.0005);
     }
-
-    public CrServoCaching(CRServo crServo, double cachingTolerance) {
+/**     * @param cachingTolerance the power delta threshold at which a power write will occur.*/
+ public CrServoCaching(CRServo crServo, double cachingTolerance) {
         this.crServo = crServo;
         this.cachingTolerance = cachingTolerance;
     }

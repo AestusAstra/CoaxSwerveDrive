@@ -11,7 +11,7 @@ public class Robot {
 
     public final GoBildaPinpointDriver odo;
     private final SwerveDrive Swerve;
-
+    double heading = 0;
 
 
     // Setup in your Robot class if you have one, or in init at start of opMode
@@ -34,7 +34,8 @@ public class Robot {
     }
 
     public void drive(double strafe, double forward, double rot) {
-        double heading = odo.getHeading(AngleUnit.DEGREES);
+        if (odo != null){odo.getHeading(AngleUnit.DEGREES);
+        }
         Swerve.drive(strafe, forward, rot, heading);
 
     }

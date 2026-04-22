@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.KIRIN.OpModes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.KIRIN.RobotConstants;
 import org.firstinspires.ftc.teamcode.KIRIN.Subsystems.Robot;
 

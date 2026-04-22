@@ -58,9 +58,9 @@ public class SwerveDrive {
     //Module Behavior
     public void drive (double forward, double strafe, double rot, double heading) {
 
-        double headingrad = Math.toRadians(heading);
-        double strafe1 = Math.cos(headingrad) * strafe - Math.sin(headingrad) * forward;
-        double forward1 = Math.sin(headingrad) * forward + Math.cos(headingrad) * strafe;
+        double heading_rad = Math.toRadians(heading);
+        double strafe1 = Math.cos(heading_rad) * strafe - Math.sin(heading_rad) * forward;
+        double forward1 = Math.sin(heading_rad) * forward + Math.cos(heading_rad) * strafe;
 
         //Kinematics (Wheel Specific Vectors)
         // Vx = strafe + rot * Ry
