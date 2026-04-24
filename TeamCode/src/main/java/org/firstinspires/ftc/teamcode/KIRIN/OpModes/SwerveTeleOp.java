@@ -12,7 +12,7 @@ public class SwerveTeleOp extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        robot = new Robot(hardwareMap);
+        robot = new Robot(telemetry, hardwareMap);
         long lastLoopTime = 0;
 
         while (opModeIsActive()) {
@@ -36,6 +36,7 @@ public class SwerveTeleOp extends LinearOpMode {
 
             telemetry.addData("Loop Time (ms)", loopTime);
             telemetry.addData("Frequency (Hz)", 1000.0 / loopTime);
+            telemetry.update();
         }
 
 

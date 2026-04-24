@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.KIRIN.RobotConstants;
 import org.firstinspires.ftc.teamcode.KIRIN.Util.CrServoCaching;
+import org.firstinspires.ftc.teamcode.KIRIN.Util.MathsOperations;
 import org.firstinspires.ftc.teamcode.KIRIN.Util.PIDcontroller;
 import org.firstinspires.ftc.teamcode.KIRIN.Util.myDcMotorEx;
 
@@ -35,12 +36,17 @@ public class SwerveModule {
         m.setPowerThresholds(0.05, 0.05);
     }
 
-    public void drive (double ModSpeed, double ModHeadingRef){
+    public void drive (double ModHeadingRef, double ModSpeed){
         //update PIDcontroller
         ModHeadingPID.setPIDgains(Kp, Ki, Kd, Kf, Kl);
-        double ModHeading = Encoder.getVoltage()/3.3 * 360 - SwerveModule.Offset;
-        servo.setPower(Math.max(ModHeadingPID.pidOut(ModHeadingRef - ModHeading), 0.00001));
-        motor.setPower(ModSpeed);
+        double ModHeading = MathsOperations.AngleWrap(Encoder.getVoltage()/3.3 * 360 - SwerveModule.Offset);
+
+        //EfficientTurn
+        double[] MI = MathsOperations.efficientTurn(ModHeadingRef, ModHeading, ModSpeed);
+
+        //SetPower
+        servo.setPower(Math.max(ModHeadingPID.pidOut(MI[0] - ModHeading), 0.00001));
+        motor.setPower(MI[1]);
     }
 
 }

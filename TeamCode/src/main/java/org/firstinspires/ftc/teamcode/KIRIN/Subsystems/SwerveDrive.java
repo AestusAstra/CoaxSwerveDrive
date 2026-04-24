@@ -4,12 +4,13 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.CRServo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.KIRIN.RobotConstants;
 import org.firstinspires.ftc.teamcode.KIRIN.Util.CrServoCaching;
+import org.firstinspires.ftc.teamcode.KIRIN.Util.MathsOperations;
 import org.firstinspires.ftc.teamcode.KIRIN.Util.myDcMotorEx;
 
 public class SwerveDrive {
-
     public SwerveModule FR_mod, FL_mod, BR_mod, BL_mod;
 
     double FR_mod_offset = RobotConstants.FR_mod_offset;
@@ -17,7 +18,10 @@ public class SwerveDrive {
     double FL_mod_offset = RobotConstants.FL_mod_offset;
     double BL_mod_offset = RobotConstants.BL_mod_offset;
 
-    public SwerveDrive(HardwareMap hardwareMap) {
+    private final Telemetry telemetry;
+
+    public SwerveDrive(Telemetry telemetry, HardwareMap hardwareMap) {
+        this.telemetry = telemetry;
 
         //I tried to pull all the hardware from one file, but I guess this system will have to do
         //Motors :)
@@ -38,13 +42,11 @@ public class SwerveDrive {
         AnalogInput BRE = hardwareMap.get(AnalogInput.class, "BRE");
         AnalogInput BLE = hardwareMap.get(AnalogInput.class, "BLE");
 
-
         // Creating new Module instances so we can command them.  Woopdedoo :)
         FR_mod = new SwerveModule(FR_motor, FRServo, FRE, FR_mod_offset);
         FL_mod = new SwerveModule(FL_motor, FLServo, FLE, BR_mod_offset);
         BR_mod = new SwerveModule(BR_motor, BRServo, BRE, FL_mod_offset);
         BL_mod = new SwerveModule(BL_motor, BLServo, BLE, BL_mod_offset);
-
     }
 
     //Heading Correction
@@ -86,16 +88,17 @@ public class SwerveDrive {
         double BLModSpeed = Math.sqrt(Math.pow(BL_strafe1, 2) + Math.pow(BL_forward1, 2));
 
         //Find the actual angle set
-        double FR_ModHeadingRef = Math.atan2(FR_forward1, FR_strafe1)*180/Math.PI;
-        double FL_ModHeadingRef = Math.atan2(FL_forward1, FL_strafe1)*180/Math.PI;
-        double BR_ModHeadingRef = Math.atan2(BR_forward1, BR_strafe1)*180/Math.PI;
-        double BL_ModHeadingRef = Math.atan2(BL_forward1, BL_strafe1)*180/Math.PI;
+        double FR_ModHeadingRef = MathsOperations.AngleWrap(Math.atan2(FR_forward1, FR_strafe1)*180/Math.PI);
+        double FL_ModHeadingRef = MathsOperations.AngleWrap(Math.atan2(FL_forward1, FL_strafe1)*180/Math.PI);
+        double BR_ModHeadingRef = MathsOperations.AngleWrap(Math.atan2(BR_forward1, BR_strafe1)*180/Math.PI);
+        double BL_ModHeadingRef = MathsOperations.AngleWrap(Math.atan2(BL_forward1, BL_strafe1)*180/Math.PI);
 
         //find motor power
         double max1 = Math.max(Math.abs(FRModSpeed), Math.abs(FLModSpeed));
         double max2 = Math.max(Math.abs(BRModSpeed), Math.abs(BLModSpeed));
         double MAX = Math.max(max1, max2);
 
+        //Power normalization
         if (MAX > 1){
             FRModSpeed /= MAX;
             FLModSpeed /= MAX;
@@ -104,9 +107,15 @@ public class SwerveDrive {
 
         }
         //set drive commands
-        FR_mod.drive(FRModSpeed, FR_ModHeadingRef);
-        FL_mod.drive(FLModSpeed, FL_ModHeadingRef);
-        BR_mod.drive(BRModSpeed, BR_ModHeadingRef);
-        BL_mod.drive(BLModSpeed, BL_ModHeadingRef);
+        FR_mod.drive(FR_ModHeadingRef, FRModSpeed);
+        FL_mod.drive(FL_ModHeadingRef, FLModSpeed);
+        BR_mod.drive(BR_ModHeadingRef, BRModSpeed);
+        BL_mod.drive(BL_ModHeadingRef, BLModSpeed);
+
+        //Diagnostic Telemetry
+        telemetry.addData("Front right module heading", "%.1f",  FR_ModHeadingRef);
+        telemetry.addData("Front left module heading","%.1f",FL_ModHeadingRef);
+        telemetry.addData("Back right module heading","%.1f",BR_ModHeadingRef);
+        telemetry.addData("Back left module heading","%.1f",BL_ModHeadingRef);
     }
 }
