@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.KIRIN.RobotConstants;
 import org.firstinspires.ftc.teamcode.KIRIN.Subsystems.Robot;
 
-@TeleOp(name = "SwerveTeleOp", group = "main")
+@TeleOp(name = "SwerveTeleop (Lizard.  Lizard.  Lizard)", group = "main")
 public class SwerveTeleOp extends LinearOpMode {
     Robot robot;
 
