@@ -32,9 +32,9 @@ public class SwerveDrive {
 
         //Servos :)
         CrServoCaching FRServo = new CrServoCaching(hardwareMap.get(CRServo.class, "FRServo"));
-        CrServoCaching FLServo = new CrServoCaching(hardwareMap.get(CRServo.class, "FRServo"));
-        CrServoCaching BRServo = new CrServoCaching(hardwareMap.get(CRServo.class, "FRServo"));
-        CrServoCaching BLServo = new CrServoCaching(hardwareMap.get(CRServo.class, "FRServo"));
+        CrServoCaching FLServo = new CrServoCaching(hardwareMap.get(CRServo.class, "FLServo"));
+        CrServoCaching BRServo = new CrServoCaching(hardwareMap.get(CRServo.class, "BRServo"));
+        CrServoCaching BLServo = new CrServoCaching(hardwareMap.get(CRServo.class, "BLServo"));
 
         //encoders
         AnalogInput FRE = hardwareMap.get(AnalogInput.class, "FRE");
